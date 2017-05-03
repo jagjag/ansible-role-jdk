@@ -1,22 +1,35 @@
-Role Name
+JDK install
 =========
 
-A brief description of the role goes here.
+A role that maintance oracle jdk and openjdk, include break jce limit
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Current only support EL
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+vendor could be oracle or openjdk
+ 
+ jdk_vendor: 'oracle'
+
+version should be 1.6 1.7 1.8
+
+ jdk_version: 1.7
+
+due to US's export policy , there is a limit to the  Java Cryptography Extension (JCE),
+so when you choose oracle jdk , you should replace the default jce to Unlimited Strength one
+
+ is_unlimited_jce: 'true'
+ jce_1_7_oracle_url: "http://somehttpshare/jce/UnlimitedJCEPolicyJDK7.zip"
+ jce_1_8_oracle_url: "http://somehttpshare/jce/jce_policy-8.zip"
+
 
 Dependencies
 ------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+none
 
 Example Playbook
 ----------------
@@ -24,8 +37,13 @@ Example Playbook
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
     - hosts: servers
+      vars:
+       jdk_vendor: 'oracle'
+       jdk_version: 1.7
+       is_unlimited_jce: 'true'
+       jce_1_7_oracle_url: "http://somehttpshare/jce/UnlimitedJCEPolicyJDK7.zip"
       roles:
-         - { role: username.rolename, x: 42 }
+         - role: jjmomark.jdk
 
 License
 -------
@@ -35,4 +53,5 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+https://github.com/jagjag
+
