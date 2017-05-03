@@ -45,7 +45,7 @@ Example Playbook
        is_unlimited_jce: 'true'
        jce_1_7_oracle_url: "http://somehttpshare/jce/UnlimitedJCEPolicyJDK7.zip"
       roles:
-         - role: jjmomark.jdk
+         - role: jagjag.jdk
 
 License
 -------
