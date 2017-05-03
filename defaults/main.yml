@@ -1,0 +1,18 @@
+---
+# defaults file for jjmomark.jdk
+
+# vendor could be oracle or openjdk
+jdk_vendor: 'oracle'
+
+# version should be 1.6 1.7 1.8
+jdk_version: 1.7
+
+
+# due to US's fucking policy , there is a limit to the  Java Cryptography Extension (JCE),
+# so when you choose oracle jdk , you should replace the default jce to Unlimited Strength one
+is_unlimited_jce: 'true'
+
+jce_1_7_oracle_url: "http://10.10.0.96:8401/jce/UnlimitedJCEPolicyJDK7.zip"
+jce_1_8_oracle_url: "http://10.10.0.96:8401/jce/jce_policy-8.zip"
+
+do_debug: true

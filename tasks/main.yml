@@ -1,0 +1,53 @@
+---
+- name: Set OS dependent variables
+  include_vars: "{{ item }}"
+  with_first_found:
+   - "{{ ansible_distribution }}_{{ ansible_distribution_major_version }}.yml"
+   - "{{ ansible_distribution }}.yml"
+   - "{{ ansible_os_family }}_{{ ansible_distribution_major_version }}.yml"
+   - "{{ ansible_os_family }}.yml"
+   - default.yml
+  tags:
+    - base
+
+- name: OS is supported
+  assert:
+    that: jjmomark_base_os_supported == True
+  tags:
+    - base
+
+- name: Set JDK vendor and version
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ jdk_vendor }}/{{ jdk_version }}"
+  tags:
+    - base
+
+- name: show
+  debug: 
+    var: jdk_vendor
+  when: do_debug
+     
+- name: show
+  debug: 
+     var: jdk_version
+  when: do_debug
+ 
+- name: show
+  debug: 
+     var: is_unlimited_jce 
+  when: do_debug
+
+- name: show
+  debug: 
+     var: is_unlimited_jce  and jdk_vendor=='oracle' and jdk_version=='1.8'
+  when: do_debug
+
+- include: packages.yml
+
+- include: jce1_7.yml
+  when:  is_unlimited_jce  and  jdk_vendor == 'oracle'  and  jdk_version == 1.7 
+
+- include: jce1_8.yml
+  when:  is_unlimited_jce  and  jdk_vendor == 'oracle'  and  jdk_version == 1.8 
+

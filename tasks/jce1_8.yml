@@ -1,0 +1,49 @@
+
+- name: replace jce 1.8 unlimited step 1 extract tarball
+  unarchive: >
+      src="{{ jce_1_8_oracle_url }}"
+      dest="{{ jce_1_8_oracle.path }}"
+      remote_src='True'
+      mode="{{ jce_1_8_oracle.mode }}"
+      owner="{{ jce_1_8_oracle.user }}"
+      group="{{ jce_1_8_oracle.group }}"
+      seuser="{{ jce_1_8_oracle.se_u }}"
+      setype="{{ jce_1_8_oracle.se_t }}"
+      serole="{{ jce_1_8_oracle.se_r }}"
+      selevel="{{ jce_1_8_oracle.se_l }}"
+  become: true
+  tags:
+    - oraclejce
+
+- name: replace jce 1.8 unlimited step 2 copy file
+  copy: >
+      src="{{ jce_1_8_oracle.path }}/{{ jce_1_8_oracle.sub_folder }}/{{ item }}"
+      dest="{{ jce_1_8_oracle.path }}"
+      remote_src=True
+      backup=yes
+      force=yes
+      mode="{{ jce_1_8_oracle.mode }}"
+      owner="{{ jce_1_8_oracle.user }}"
+      group="{{ jce_1_8_oracle.group }}"
+      seuser="{{ jce_1_8_oracle.se_u }}"
+      setype="{{ jce_1_8_oracle.se_t }}"
+      serole="{{ jce_1_8_oracle.se_r }}"
+      selevel="{{ jce_1_8_oracle.se_l }}"
+  with_items: "{{ jce_files }}"
+  become: true
+  tags:
+    - oraclejce
+
+
+- name: replace jce 1.8 unlimited step 3 delete files
+  file: >
+      path="{{ item }}"
+      force='yes'
+      state=absent
+  with_items:
+      - "{{ jce_1_8_oracle.path }}/{{ jce_1_8_oracle.sub_folder }}"
+      - "{{ jce_1_8_oracle.path }}/{{ jce_1_8_oracle.file_name }}"
+  become: true
+  tags:
+    - oraclejce
+

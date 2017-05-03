@@ -1,0 +1,6 @@
+- name: install jdk
+  yum: name={{ item }} state=latest
+  with_items: "{{ package_list }}"
+  become: true
+  tags:
+    - packages

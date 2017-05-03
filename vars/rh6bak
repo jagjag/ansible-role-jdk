@@ -1,0 +1,73 @@
+jjmomark_base_os_supported: yes
+
+
+
+
+# rpm package to install 
+  sun_jdk1.6_list:
+    - java-1.6.0-sun
+    - java-1.6.0-sun-devel
+    - java-1.6.0-sun-jdbc
+    
+  open_jdk1.6_list:
+    - java-1.6.0-openjdk
+    - java-1.6.0-openjdk-devel
+    - java-1.6.0-openjdk-jdbc
+ 
+  oracle_jdk1.7_list:
+    - java-1.7.0-oracle
+    - java-1.7.0-oracle-devel
+    - java-1.7.0-oracle-jdbc
+ 
+  open_jdk1.7_list:
+    - java-1.7.0-openjdk
+    - java-1.7.0-openjdk-devel
+    - java-1.7.0-openjdk-jdbc
+
+  oracle_jdk1.8_list:
+    - java-1.8.0-oracle
+    - java-1.8.0-oracle-devel
+    - java-1.8.0-oracle-jdbc
+
+  open_jdk1.8_list:
+    - java-1.8.0-openjdk
+    - java-1.8.0-openjdk-devel
+    - java-1.8.0-openjdk-jdbc
+
+
+
+  'jce_1.7_oracle': {
+       'path': '/usr/lib/jvm/jce-1.7.0-oracle', 
+       'file_name': 'UnlimitedJCEPolicyJDK7.zip', 
+       'folder': 'UnlimitedJCEPolicyJDK7',
+       'sub_folder': 'UnlimitedJCEPolicy',
+       'mode': '0644',
+       'user': 'root',
+       'group': 'group',
+       'se_u': 'staff_u',
+       'se_r': 'object_r',
+       'se_t': 'lib_t',
+       'se_l': 's0'
+   }
+
+   # root root staff_u:object_r:lib_t:s0
+ 
+   'jce_1.8_oracle': {
+       'path': '/usr/lib/jvm/jce-1.8.0-oracle',
+       'file_name': 'jce_policy-8.zip', 
+       'folder': 'jce_policy-8',
+       'sub_folder': 'UnlimitedJCEPolicyJDK8',
+       'mode': '0644',
+       'user': 'root',
+       'group': 'group',
+       'se_u': 'staff_u',
+       'se_r': 'object_r',
+       'se_t': 'lib_t',
+       'se_l': 's0'
+   }
+
+  jce_files:
+     - local_policy.jar
+     - US_export_policy.jar
+
+
