@@ -6,7 +6,7 @@ A role that maintance oracle jdk and openjdk, include break jce limit
 Requirements
 ------------
 
-This role requires Ansible 2.0 or higher  and  Current only support RHEL 6 and 7
+This role requires Ansible 2.2 or higher  and  Current only support RHEL 6 and 7
 
 Role Variables
 --------------
