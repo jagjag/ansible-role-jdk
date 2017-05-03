@@ -13,7 +13,7 @@ Role Variables
 
  vendor could be oracle or openjdk
 
- ``` 
+ ```yml 
  jdk_vendor: 'oracle'
  ```
 
